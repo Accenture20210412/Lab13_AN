@@ -36,7 +36,7 @@ public class DataSearcher {
         return femaleActorsInMov;
     }
 
-    public String getMovieForDirector(List<Movie> movies, int movieNum, String director) {
+    public String getMovieForDirector(List<Movie> movies, int movieNum, String director) throws NoSuchElementException {
         return movies.stream()
                 .filter(movie -> movie.getDirector() == director)
                 .collect(Collectors.toList())

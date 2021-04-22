@@ -25,7 +25,7 @@ public class DataSearcherTest {
     @BeforeEach
     void init() {
         actors1 = List.of(new Actor("actor1", Sex.F), new Actor("actor2", Sex.F), new Actor("actor3", Sex.M));
-        actors2 = List.of(new Actor("actor4", Sex.M), new Actor("actor5", Sex.F), new Actor("actor6", Sex.M));
+        actors2 = List.of(new Actor("actor4", Sex.M), new Actor("actor5", Sex.M), new Actor("actor6", Sex.M));
         actors3 = List.of(new Actor("actor7", Sex.M), new Actor("actor8", Sex.F), new Actor("actor9", Sex.M));
         Movie movie1 = new Movie(1, "movie1", "director1");
         movie1.setCast(actors1);
@@ -38,7 +38,7 @@ public class DataSearcherTest {
 
     @Test
     public void shouldReturnNumberOfMaleActors() {
-        Assertions.assertEquals(5, dS.getMaleActors(movies).size());
+        Assertions.assertEquals(6, dS.getMaleActors(movies).size());
     }
 
     @Test
@@ -54,6 +54,16 @@ public class DataSearcherTest {
     @Test
     public void shouldReturnSpecificMovieForDirector() {
         Assertions.assertEquals("movie1", dS.getMovieForDirector(movies, 0, "director1"));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenMovieNumIsToHigh() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> dS.getMovieForDirector(movies, 20, "director1"));
+    }
+
+    @Test
+    public void shouldReturnMoviesWithoutWomen() {
+        Assertions.assertEquals(1, dS.getMoviesWithoutWomen(movies).size());
     }
 
 

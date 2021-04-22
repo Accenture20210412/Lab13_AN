@@ -13,7 +13,7 @@ public class HollywoodMain {
 
         DataSearcher dataSearcher = new DataSearcher();
 
-        dataSearcher.getMaleActors(actors);
+        dataSearcher.getMaleActors(movies);
         dataSearcher.getFemaleActorsByMovieNumber(actors, movies, 1);
         System.out.println("\nMetoda 3: " + dataSearcher.getMovieForDirector(movies, 1, "Nancy Meyers"));
         dataSearcher.listWithJorKFirstLetter(actors);

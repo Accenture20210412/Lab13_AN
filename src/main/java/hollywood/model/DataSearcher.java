@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 
 public class DataSearcher {
 
-    public List<Actor> getMaleActors(List<Actor> actors) {
-        List<Actor> maleActors = actors.stream().filter(actor ->actor.getSex() == Sex.M).collect(Collectors.toList());
+    public List<Actor> getMaleActors(List<Movie> movies) {
+        List<Actor> maleActors = movies.stream()
+                .flatMap(movie -> movie.getCast().stream())
+                .distinct()
+                .filter(actor ->actor.getSex() == Sex.M).collect(Collectors.toList());
         System.out.println("\nMetoda 1");
         displayMaleActors(maleActors);
         return maleActors;
@@ -38,6 +41,14 @@ public class DataSearcher {
                 .collect(Collectors.toList())
                 .get(movieNum)
                 .getTitle();
+    }
+
+    public List<Movie> getMoviesWithoutWomen(List<Movie> movies){
+        List<Movie> listWtWom = movies.stream()
+                .filter(movie -> movie.getCast().stream()
+                        .noneMatch(actor -> actor.getSex().equals(Sex.F)))
+                .collect(Collectors.toList());
+        return listWtWom;
     }
 
     public List<Actor> listWithJorKFirstLetter(List<Actor> actors) {

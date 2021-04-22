@@ -11,11 +11,9 @@ import java.util.stream.Collectors;
 
 public class DataSearcher {
 
-    private List<Actor> actors = Provider.getActors();
-    private List<Movie> movies = Provider.getMovies();
-
     public List<Actor> getMaleActors(List<Actor> actors) {
         List<Actor> maleActors = actors.stream().filter(actor ->actor.getSex() == Sex.M).collect(Collectors.toList());
+        System.out.println("\nMetoda 1");
         displayMaleActors(maleActors);
         return maleActors;
     }
@@ -29,6 +27,7 @@ public class DataSearcher {
                 .filter(actor -> actor.getSex() == Sex.F)
                 .collect(Collectors.toList());
 
+        System.out.println("\nMetoda 2");
         displayFeMaleActors(femaleActorsInMov);
         return femaleActorsInMov;
     }
@@ -45,8 +44,10 @@ public class DataSearcher {
         List<Actor> lista = actors.stream()
                 .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
                 .sorted(Comparator.comparing(Actor::getSex))
-                .collect(Collectors.toList())
-        System.out.println(lista.size());
+                .collect(Collectors.toList());
+
+        System.out.println("\nMetoda 5");
+        System.out.println("Ilość osób których imiona zaczynają się o 'J' lub 'K' to: " + lista.size());
         return lista;
     }
 
@@ -68,6 +69,7 @@ public class DataSearcher {
         actorsMap.put("Sex.M", males);
         actorsMap.put("Sex.F", females);
 
+        System.out.println("\nMetoda 6");
         displayMaleActors(males);
         displayFeMaleActors(females);
         return actorsMap;

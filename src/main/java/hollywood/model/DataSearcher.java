@@ -3,7 +3,9 @@ package hollywood.model;
 import hollywood.Provider;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,30 @@ public class DataSearcher {
         return lista;
     }
 
+    public Map<String, List<Actor>> mapWithJorKFirstLetter(List<Actor> actors) {
+
+        Map<String, List<Actor>> actorsMap = new HashMap<>();
+
+        List<Actor> males = actors.stream()
+                .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
+                .filter(actor -> actor.getSex() == Sex.M)
+                .sorted()
+                .collect(Collectors.toList());
+
+        List<Actor> females = actors.stream()
+                .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
+                .filter(actor -> actor.getSex() == Sex.F)
+                .sorted()
+                .collect(Collectors.toList());
+        actorsMap.put("Sex.M", males);
+        actorsMap.put("Sex.F", females);
+
+        displayMaleActors(males);
+        displayFeMaleActors(females);
+        return actorsMap;
+    }
+
+
     private void displayMaleActors(List<Actor> data) {
         data.forEach(System.out::println);
         System.out.println("Liczba męskich aktorów wynosi: " + data.size());
@@ -57,4 +83,6 @@ public class DataSearcher {
         data.stream().sorted().forEach(System.out::println);
         System.out.println("Liczba aktorek wynosi: " + data.size());
     }
+
+
 }

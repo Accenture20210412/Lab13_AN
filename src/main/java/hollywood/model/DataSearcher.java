@@ -2,6 +2,7 @@ package hollywood.model;
 
 import hollywood.Provider;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,15 @@ public class DataSearcher {
                 .collect(Collectors.toList())
                 .get(movieNum)
                 .getTitle();
+    }
+
+    public List<Actor> listWithJorKFirstLetter(List<Actor> actors) {
+        List<Actor> lista = actors.stream()
+                .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
+                .sorted(Comparator.comparing(Actor::getSex))
+                .collect(Collectors.toList())
+        System.out.println(lista.size());
+        return lista;
     }
 
     private void displayMaleActors(List<Actor> data) {

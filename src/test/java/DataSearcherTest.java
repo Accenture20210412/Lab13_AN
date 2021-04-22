@@ -67,6 +67,7 @@ public class DataSearcherTest {
     @Test
     public void shouldReturnMoviesWithoutWomen() {
         Assertions.assertEquals(1, dS.getMoviesWithoutWomen(movies).size());
+        Assertions.assertEquals("movie2", dS.getMoviesWithoutWomen(movies).get(0).getTitle());
     }
 
     @Test
@@ -75,6 +76,14 @@ public class DataSearcherTest {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         Assertions.assertEquals(2, dS.listWithJorKFirstLetter(newList).size());
+    }
+
+    @Test
+    public void shouldReturnNumberOfMaleActorsNamedFromJorK() {
+        List<Actor> newList = Stream.of(actors1, actors3)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        Assertions.assertEquals(0, dS.mapWithJorKFirstLetter(newList).values().stream().filter(actors -> actors.contains("%s")));
     }
 
 

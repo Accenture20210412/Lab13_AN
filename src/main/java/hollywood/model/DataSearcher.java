@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class DataSearcher {
         return maleActors;
     }
 
-    public List<Actor> getFemaleActorsByMovieNumber(List<Actor> actors, List<Movie> movies, int movieNumber) {
+    public List<Actor> getFemaleActorsByMovieNumber(List<Actor> actors, List<Movie> movies, int movieNumber) throws NoSuchElementException {
         Movie findMovie = movies.stream()
                 .filter(movie -> movie.getNr() == movieNumber)
                 .findFirst()

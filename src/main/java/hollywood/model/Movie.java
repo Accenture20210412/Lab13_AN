@@ -54,4 +54,7 @@ public class Movie {
 		        nr, title, director, cast);
 	}
 
+	public void setCast(List<Actor> asList) {
+		this.cast = asList;
+	}
 }

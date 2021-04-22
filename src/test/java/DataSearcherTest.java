@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -80,10 +81,14 @@ public class DataSearcherTest {
 
     @Test
     public void shouldReturnNumberOfMaleActorsNamedFromJorK() {
+
         List<Actor> newList = Stream.of(actors1, actors3)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        Assertions.assertEquals(0, dS.mapWithJorKFirstLetter(newList).values().stream().filter(actors -> actors.contains("%s")));
+
+        Map<Sex, List<Actor>> mapa = dS.mapWithJorKFirstLetter(newList);
+
+        Assertions.assertEquals("Johnny Depp", mapa.get(Sex.M).get(1).getName());
     }
 
 

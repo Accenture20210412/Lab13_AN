@@ -63,23 +63,23 @@ public class DataSearcher {
         return lista;
     }
 
-    public Map<String, List<Actor>> mapWithJorKFirstLetter(List<Actor> actors) {
+    public Map<Sex, List<Actor>> mapWithJorKFirstLetter(List<Actor> actors) {
 
-        Map<String, List<Actor>> actorsMap = new HashMap<>();
+        Map<Sex, List<Actor>> actorsMap = new HashMap<>();
 
         List<Actor> males = actors.stream()
                 .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
                 .filter(actor -> actor.getSex() == Sex.M)
-                .sorted()
+                .sorted(Comparator.comparing( (Actor a) -> a.getName().split(" ")[1]))
                 .collect(Collectors.toList());
 
         List<Actor> females = actors.stream()
                 .filter(actor -> (actor.getName().startsWith("J") || actor.getName().startsWith("K")))
                 .filter(actor -> actor.getSex() == Sex.F)
-                .sorted()
+                .sorted(Comparator.comparing( (Actor a) -> a.getName().split(" ")[1]))
                 .collect(Collectors.toList());
-        actorsMap.put("Sex.M", males);
-        actorsMap.put("Sex.F", females);
+        actorsMap.put(Sex.M, males);
+        actorsMap.put(Sex.F, females);
 
         System.out.println("\nMetoda 6");
         displayMaleActors(males);
